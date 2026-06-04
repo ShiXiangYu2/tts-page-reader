@@ -1,0 +1,444 @@
+/* content.css - 悬浮工具条样式 */
+
+/* 全局变量 */
+:root {
+  --tts-primary: #2563EB;
+  --tts-primary-hover: #1D4ED8;
+  --tts-secondary: #64748B;
+  --tts-surface: #F8FAFC;
+  --tts-border: #E2E8F0;
+  --tts-text: #1E293B;
+  --tts-text-secondary: #64748B;
+  --tts-success: #22C55E;
+  --tts-error: #EF4444;
+}
+
+/* 悬浮工具条容器 */
+.tts-floating-bar {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 2147483647;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--tts-text);
+}
+
+/* 收起状态 - 只显示图标按钮 */
+.tts-floating-bar.collapsed {
+  width: 48px;
+  height: 48px;
+}
+
+/* 展开状态 */
+.tts-floating-bar.expanded {
+  width: 320px;
+}
+
+/* 最小化按钮 */
+.tts-toggle-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 48px;
+  height: 48px;
+  background: var(--tts-primary);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  transition: all 0.2s ease;
+}
+
+.tts-toggle-btn:hover {
+  background: var(--tts-primary-hover);
+  transform: scale(1.05);
+}
+
+/* 工具条面板 */
+.tts-panel {
+  display: none;
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  width: 320px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.tts-floating-bar.expanded .tts-panel {
+  display: block;
+}
+
+/* 面板头部 */
+.tts-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, var(--tts-primary) 0%, var(--tts-primary-hover) 100%);
+  color: white;
+}
+
+.tts-panel-title {
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tts-close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tts-close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 页面信息 */
+.tts-page-info {
+  padding: 12px 16px;
+  background: var(--tts-surface);
+  border-bottom: 1px solid var(--tts-border);
+  font-size: 13px;
+}
+
+.tts-page-title {
+  font-weight: 500;
+  color: var(--tts-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 4px;
+}
+
+.tts-segment-count {
+  color: var(--tts-text-secondary);
+}
+
+/* 导航栏 */
+.tts-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--tts-border);
+}
+
+.tts-nav-btn {
+  padding: 6px 12px;
+  background: var(--tts-surface);
+  border: 1px solid var(--tts-border);
+  border-radius: 6px;
+  color: var(--tts-secondary);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tts-nav-btn:hover:not(:disabled) {
+  background: var(--tts-border);
+  color: var(--tts-text);
+}
+
+.tts-nav-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tts-nav-indicator {
+  font-size: 13px;
+  color: var(--tts-secondary);
+  font-weight: 500;
+}
+
+/* 当前段落预览 */
+.tts-preview {
+  padding: 12px 16px;
+  min-height: 60px;
+  max-height: 80px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--tts-border);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.tts-preview:hover {
+  background: var(--tts-surface);
+}
+
+.tts-preview-content {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--tts-text);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tts-preview-hint {
+  font-size: 10px;
+  color: var(--tts-secondary);
+  margin-top: 4px;
+  opacity: 0.7;
+}
+
+.tts-preview-content {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--tts-text);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 播放控制 */
+.tts-controls {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--tts-border);
+}
+
+.tts-control-btn {
+  flex: 1;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.tts-play-btn {
+  background: var(--tts-primary);
+  color: white;
+}
+
+.tts-play-btn:hover:not(:disabled) {
+  background: var(--tts-primary-hover);
+}
+
+.tts-play-btn.playing {
+  background: var(--tts-success);
+}
+
+.tts-play-btn.playing:hover:not(:disabled) {
+  background: #16A34A;
+}
+
+.tts-secondary-btn {
+  background: var(--tts-surface);
+  color: var(--tts-secondary);
+}
+
+.tts-secondary-btn:hover:not(:disabled) {
+  background: var(--tts-border);
+}
+
+.tts-control-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 设置面板 */
+.tts-settings {
+  padding: 12px 16px;
+}
+
+.tts-setting-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.tts-setting-row:last-child {
+  margin-bottom: 0;
+}
+
+.tts-setting-label {
+  width: 40px;
+  font-size: 13px;
+  color: var(--tts-secondary);
+}
+
+.tts-setting-row input[type="range"] {
+  flex: 1;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--tts-border);
+  border-radius: 2px;
+  outline: none;
+}
+
+.tts-setting-row input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--tts-primary);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.tts-setting-row input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--tts-primary);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+.tts-setting-value {
+  width: 40px;
+  font-size: 12px;
+  color: var(--tts-secondary);
+  text-align: right;
+}
+
+.tts-setting-row select {
+  flex: 1;
+  padding: 6px 8px;
+  background: white;
+  border: 1px solid var(--tts-border);
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--tts-text);
+  cursor: pointer;
+  outline: none;
+}
+
+.tts-setting-row select:focus {
+  border-color: var(--tts-primary);
+}
+
+/* 状态消息 */
+.tts-status {
+  padding: 8px 16px;
+  font-size: 12px;
+  text-align: center;
+  display: none;
+}
+
+.tts-status.error {
+  display: block;
+  background: #FEF2F2;
+  color: var(--tts-error);
+}
+
+.tts-status.success {
+  display: block;
+  background: #F0FDF4;
+  color: var(--tts-success);
+}
+
+/* 段落高亮样式 */
+.tts-highlight {
+  background: linear-gradient(to right, rgba(37, 99, 235, 0.15), rgba(37, 99, 235, 0.08)) !important;
+  border-left: 3px solid var(--tts-primary) !important;
+  padding-left: 8px !important;
+  margin-left: -8px !important;
+  border-radius: 0 4px 4px 0;
+  transition: all 0.3s ease;
+}
+
+.tts-highlight-active {
+  background: linear-gradient(to right, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.1)) !important;
+  border-left: 3px solid var(--tts-success) !important;
+  padding-left: 8px !important;
+  margin-left: -8px !important;
+  border-radius: 0 4px 4px 0;
+  animation: tts-pulse 2s infinite;
+}
+
+@keyframes tts-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* 滚动到高亮段落 */
+.tts-scroll-to-highlight {
+  scroll-margin-top: 100px;
+}
+
+/* 段落列表 */
+.tts-segment-list {
+  max-height: 200px;
+  overflow-y: auto;
+  border-bottom: 1px solid var(--tts-border);
+}
+
+.tts-segment-list-title {
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--tts-secondary);
+  background: var(--tts-surface);
+  border-bottom: 1px solid var(--tts-border);
+  position: sticky;
+  top: 0;
+}
+
+.tts-segment-items {
+  padding: 4px 0;
+}
+
+.tts-segment-item {
+  padding: 6px 16px;
+  font-size: 12px;
+  color: var(--tts-text);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 0.15s ease;
+}
+
+.tts-segment-item:hover {
+  background: var(--tts-surface);
+}
+
+.tts-segment-item.active {
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--tts-success);
+  font-weight: 500;
+}
+
+.tts-segment-empty {
+  padding: 16px;
+  text-align: center;
+  color: var(--tts-secondary);
+  font-size: 12px;
+}
